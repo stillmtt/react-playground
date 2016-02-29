@@ -4,25 +4,33 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var elm = document.getElementById('app');
 
-/**
- * component 
- */
+var App = React.createClass({
 
-var Hello = React.createClass({
+	getInitialState: function() {
+	    return {
+	    	txt: 'this is txt from constructor'
+	    };
+	},
+
+	update: function(e){
+		this.setState({txt: e.target.value});
+	},
 
 	render: function(){
 		return (
-			React.createElement('div', null, 'hello stillaccia')
+			<div>
+				<input type="text" onChange={this.update} />
+				<h1>{this.state.txt}</h1>
+			</div>
 		);
 	}
-
 });
 
-/**
- * render to document 
- */
-ReactDOM.render(
-	React.createElement(Hello), 
-	document.getElementById('app')
-);
+
+ReactDOM.render(<App />, elm);
+
+
+
+

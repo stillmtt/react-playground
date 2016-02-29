@@ -8,9 +8,8 @@ var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash.assign');
-var sass = require('gulp-sass');
 var minify = require('gulp-minify');
-
+var rename = require('gulp-rename');
 var babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
 
 /*
@@ -19,7 +18,14 @@ var babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
 
 // add custom browserify options here
 var customOpts = {
-  entries: ['./js/sample.js'],
+  entries: [
+  './js/textinput.js', 
+  './js/slider.js',
+  './js/child_props.js',
+  './js/cycle.js',
+  './js/mixin.js',
+  './js/composable_component.js'  
+  ],
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
@@ -38,7 +44,7 @@ function bundle() {
     .pipe(source('main.jsx')) // Set source name
     // optional, remove if you don't need to buffer file contents
     .pipe(buffer())
-
+    .pipe(rename('app.js'))
     // optional, remove if you dont want sourcemaps
     .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
        // Add transformation tasks to the pipeline here.
@@ -53,7 +59,7 @@ function bundle() {
 gulp.task('compress', function() {
   gulp.src('./js/app.js')
     .pipe(minify())
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('./js/min/'));
 });
 
 
