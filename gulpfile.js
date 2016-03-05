@@ -24,12 +24,29 @@ var customOpts = {
   './js/child_props.js',
   './js/cycle.js',
   './js/mixin.js',
-  './js/composable_component.js'  
+  './js/composable_component.js',
+  './view/component.js',
+  './constants/constants.js',
+  './dispatcher/dispatcher.js',
+  './store/store.js',
+  './redux/reduxExample.js',
+  './redux/comp.js',
+  './redux/reducers.js',
+  './redux/store.js',
+  './redux/index.js',
+  './redux/actions.js',
+  './redux/List.js',
+  './redux/addItem.js',
+  './simple_redux/actions.js',
+  './simple_redux/constants.js',
+  './simple_redux/app.js',
+  './simple_redux/index.js',
+  './simple_redux/reducers.js'
   ],
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
-var b = watchify(browserify(opts)).transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms; 
+var b = watchify(browserify(opts)).transform(babelify, {presets: ['es2017', 'react']}); // Babel tranforms; 
 
 
 gulp.task('js', bundle); // so you can run `gulp js` to build the file
